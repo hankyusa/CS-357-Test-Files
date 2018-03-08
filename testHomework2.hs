@@ -113,7 +113,9 @@ testMakeLongInt = and [
 -- 2.6 2
 testEvaluateLongInt = and [
     evaluateLongInt (10, [1,2,3]) == 123, 
-    evaluateLongInt example == 12345678901234567890
+    evaluateLongInt example == 12345678901234567890,
+    evaluateLongInt (10, [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]) == 1234567890123456789,
+    evaluateLongInt (10, ([1..9] ++ (0:[9,8..1]))) == 1234567890987654321
   ]
 
 -- 2.6 3
