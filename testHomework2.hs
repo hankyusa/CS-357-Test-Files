@@ -107,6 +107,7 @@ testNumeral = and [
 testMakeLongInt = and [
     makeLongInt 123 10 == (10, [1,2,3]), 
     makeLongInt 12345678901234567890 10 == example,
+    makeLongInt 672 16 == (16, [2,10,0]),
     and [(makeLongInt ((toInteger r)^(toInteger p)) r) == (r, 1 : replicate p 0) | r<-[2..100], p<-[0..10]]
   ]
 
