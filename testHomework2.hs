@@ -124,9 +124,10 @@ changeRadixLongIntSpec :: Numeral -> Int -> Numeral
 changeRadixLongIntSpec n r = makeLongInt (evaluateLongInt n) r
 
 testChangeRadixLongInt = and [
-    changeRadixLongInt (10, [1,2,3]) 8 == (8, [1,7,3]), 
+    changeRadixLongInt (10, [1,2,3]) 8 == (8, [1,7,3]),
     changeRadixLongInt (10, [1,2,3]) 16 == (16, [7,11]),
-    changeRadixLongInt (16, [13,14,10,13,11,14,14,15]) 17 == (17, [9,1,13,3,6,16,7,8])
+    changeRadixLongInt (16, [13,14,10,13,11,14,14,15]) 17 == (17, [9,1,13,3,6,16,7,8]),
+    changeRadixLongInt (192837465, [1..100]) 1234567890 == changeRadixLongIntSpec (192837465, [1..100]) 1234567890
   ]
 
 -- 2.6 4
