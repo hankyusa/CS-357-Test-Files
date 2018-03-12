@@ -25,6 +25,17 @@ Add the following to the top of your homework2.hs file:
       mulLongInts
     ) where
 
+Make sure your this test file is in the same directory as your homework2.hs file. 
+
+run GHCI in the same directory and execute the following:
+
+>> :l testHomework2.hs
+>> testAll
+
+You can find the names for specific tests in this file. 
+
+You might even want to copy specific expressions to GHCI and evaluate them. 
+
 -}
 
 import Data.List
