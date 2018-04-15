@@ -1,12 +1,6 @@
 {-
 
-File for testing solutions to Homework 2. 
-
-To install the necessary packages, run the following commands in the terminal.
-If you aren't using Stack, then replace `stack` with `cabal`.
-
-    >> stack update
-    >> stack install random
+File for testing solutions to Homework 4. 
 
 Add the following to the top of your Homework4.hs file:
 
@@ -25,11 +19,11 @@ Add the following to the top of your Homework4.hs file:
       drawStrategy
     ) where
 
-Make sure this test file is in the same directory as your homework2.hs file. 
+Make sure this test file is in the same directory as your Homework4.hs file. 
 
 run GHCI in the same directory and execute the following:
 
->> :l testHomework2.hs
+>> :l testHomework4.hs
 >> testAll
 
 You can find the names for specific tests in this file. 
