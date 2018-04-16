@@ -32,7 +32,7 @@ You might even want to copy specific expressions to GHCI and evaluate them.
 
 -}
 
-import Data.List
+import qualified Data.List as L
 import Data.Char
 import System.IO
 import System.Random
@@ -40,57 +40,68 @@ import Homework4
 
 -- All of homework 4
 testAll = and [
-    testGenomeLists
+    testGenomeLists,
+    testSorting,
+    testGameTrees,
+    testDrawing
   ]
-
-($==) :: Eq a => [a] -> [a] -> Bool
-($==) [] ys = ys == []
-($==) (x:xs) ys = (length (x:xs) == length ys) && (elem x ys) && (xs $== (delete x ys))
 
 --4.1 Genome Lists (40pts)
 testGenomeLists = and [
-    testInsertions,
-    testDeletions,
-    testSubstitutions,
-    testTranspositions
+    test_insertions,
+    test_deletions,
+    test_substitutions,
+    test_transpositions
   ]
 
-testInsertions     = and [
-    insertions "GC" $== ["AGC","GAC","GCA","GGC","GGC","GCG","CGC","GCC","GCC","TGC","GTC","GCT"]
+($=) :: Ord a => [a] -> [a] -> Bool
+($=) xs ys = L.sort xs == L.sort ys
+
+test_insertions     = and [
+    insertions "GC" $= ["AGC","GAC","GCA","GGC","GGC","GCG","CGC","GCC","GCC","TGC","GTC","GCT"]
   ]
 
-testDeletions      = and [
-    deletions "AGCT" $== ["GCT","ACT","AGT","AGC"]
+test_deletions      = and [
+    deletions "AGCT" $= ["GCT","ACT","AGT","AGC"]
   ]
 
-testSubstitutions  = and [
-    substitutions "ACT" $== ["ACT","AAT","ACA","GCT","AGT","ACG","CCT","ACT","ACC","TCT","ATT","ACT"]
+test_substitutions  = and [
+    substitutions "ACT" $= ["ACT","AAT","ACA","GCT","AGT","ACG","CCT","ACT","ACC","TCT","ATT","ACT"]
   ]
 
-testTranspositions = and [
-    transpositions  "GATC" $== ["AGTC","GTAC","GACT"]
+test_transpositions = and [
+    transpositions  "GATC" $= ["AGTC","GTAC","GACT"]
   ]
 
 --4.2 Sorting (20pts)
 testSorting = and [
-    testInsertions,
-    testDeletions,
-    testSubstitutions,
-    testTranspositions
+    test_insert,
+    test_isort
+  ]
+
+test_insert = and [
+    insert 1 [2,4] == [1,2,4],
+    insert 3 [2,4] == [2,3,4],
+    insert 5 [2,4] == [2,4,5],
+    insert 42 [] == [42]
+  ]
+
+test_isort = and $ map (\l -> isort l == L.sort l) [
+    [],
+    [2345,8,5,345,57,4,52,1,34,142342,35,66],
+    [48,678,2,54,61,45754,685,73,54246,37,4567,46,3],
+    [932,346,7,48584,1,45,6768,345,22,9,4,3122543,22],
+    [781, 278, 834, 138, 901, 299, 708, 556, 334, 208],
+    [329, 933, 981, 593, 814, 126, 74, 893, 813, 339],
+    [812, 139, 654, 751, 490, 946, 841, 765, 641, 339]
   ]
 
 --4.3 Game Trees (40pts)
 testGameTrees = and [
-    testInsertions,
-    testDeletions,
-    testSubstitutions,
-    testTranspositions
+    True
   ]
 
 --4.4 (Optional) Drawing Game Trees and Strategies (30pts EC)
 testDrawing = and [
-    testInsertions,
-    testDeletions,
-    testSubstitutions,
-    testTranspositions
+    True
   ]
