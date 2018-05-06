@@ -15,11 +15,12 @@ infTreeZigZagR = T () E infTreeZigZagL
 
 test_bfnum = bfnum exmplTree == T 1 (T 2 E (T 4 E E)) (T 3 E E)
 
--- This makes a string of mermaid code. Remember to use putStr to print it.
-toMermaid :: Show a => Tree a -> Tree a -> String
-toMermaid  E        rT@(T _ l r) = "graph TD" ++ toMermaid rT l ++ toMermaid rT r
-toMermaid (T p _ _)     E        = "\n" ++ show p ++ "-.->Empty_Tree"
-toMermaid (T p _ _) cT@(T c l r) = line ++ toMermaid cT l ++ toMermaid cT r
-where line = "\n" ++ show p ++ "==>" ++ show c
+-- This makes a string of mermaid code. Remember to use putStrLn to print it.
+toMermaid :: Show a => Tree a -> String
+toMermaid rT@(T _ l r) = "graph TD" ++ connect rT l ++ connect rT r ++ "\n"
+    where connect :: Show a => Tree a -> Tree a -> String
+          connect (T p _ _)     E        = "\n" ++ show p ++ "-.->Empty_Tree"
+          connect (T p _ _) cT@(T c l r) = line ++ connect cT l ++ connect cT r
+              where line = "\n" ++ show p ++ "==>" ++ show c
 
 -- To see the mermaid code built go to https://mermaidjs.github.io/mermaid-live-editor/ .
