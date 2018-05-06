@@ -40,8 +40,10 @@ exmplExp2 = (Let
                 )
            )
 exmplExp3 = (Num 2) `Add` (Num 3)
+
 testExprShow = show exmplExp1 =="let x = 3 in x + 5 end"
-            && show exmplExp2 == "let y = -9 in let x = 1 - y in x + ((x / (x - 1)) * 5) end end"
+            && show exmplExp2 == "let y = -9 in let x = 1 - y in x + ((x / (x - 5)) * 10) end end"
+
 testEval =     eval exmplExp1 == 8
             && eval exmplExp2 == 30
 
